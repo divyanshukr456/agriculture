@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Stars, Sparkles } from '@react-three/drei';
-import * as THREE from 'three';
+import { ErrorBoundary } from './ErrorBoundary';
 
 function FloatingCrops() {
   const group = useRef();
@@ -15,7 +15,6 @@ function FloatingCrops() {
 
   return (
     <group ref={group}>
-      {/* Dynamic 3D Geometric Flora Elements */}
       {[...Array(24)].map((_, i) => {
         const x = (Math.random() - 0.5) * 26;
         const y = (Math.random() - 0.5) * 20;
@@ -45,7 +44,6 @@ function FloatingCrops() {
         );
       })}
 
-      {/* Floating 3D Wheat-like Spikes */}
       {[...Array(12)].map((_, i) => {
         const x = (Math.random() - 0.5) * 22;
         const y = (Math.random() - 0.5) * 16;
@@ -64,22 +62,64 @@ function FloatingCrops() {
   );
 }
 
+function FallbackCSSBackground() {
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'radial-gradient(circle at 50% 20%, #0d2818 0%, #050b06 75%)',
+      zIndex: 0,
+      pointerEvents: 'none',
+      overflow: 'hidden',
+    }}>
+      <div style={{
+        position: 'absolute',
+        width: '600px',
+        height: '600px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
+        top: '-100px',
+        left: '20%',
+        filter: 'blur(60px)',
+      }} />
+    </div>
+  );
+}
+
 export default function ThreeBackground() {
+  const [webglSupported, setWebglSupported] = useState(true);
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) setWebglSupported(false);
+    } catch (e) {
+      setWebglSupported(false);
+    }
+  }, []);
+
+  if (!webglSupported) {
+    return <FallbackCSSBackground />;
+  }
+
   return (
     <div className="canvas-container">
-      <Canvas camera={{ position: [0, 0, 9], fov: 55 }}>
-        <color attach="background" args={['#050c07']} />
-        <fog attach="fog" args={['#050c07', 8, 25]} />
-        
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 15, 10]} intensity={1.5} color="#34d399" />
-        <pointLight position={[-10, -10, -5]} intensity={0.8} color="#f59e0b" />
-        
-        <Stars radius={60} depth={40} count={1800} factor={4} saturation={0} fade speed={1.2} />
-        <Sparkles count={80} scale={18} size={2.5} speed={0.4} opacity={0.6} color="#a8e6cf" />
-        
-        <FloatingCrops />
-      </Canvas>
+      <ErrorBoundary fallback={<FallbackCSSBackground />}>
+        <Canvas camera={{ position: [0, 0, 9], fov: 55 }} gl={{ antialias: true, alpha: true }}>
+          <color attach="background" args={['#050c07']} />
+          <fog attach="fog" args={['#050c07', 8, 25]} />
+          
+          <ambientLight intensity={0.6} />
+          <pointLight position={[10, 15, 10]} intensity={1.5} color="#34d399" />
+          <pointLight position={[-10, -10, -5]} intensity={0.8} color="#f59e0b" />
+          
+          <Stars radius={60} depth={40} count={1800} factor={4} saturation={0} fade speed={1.2} />
+          <Sparkles count={80} scale={18} size={2.5} speed={0.4} opacity={0.6} color="#a8e6cf" />
+          
+          <FloatingCrops />
+        </Canvas>
+      </ErrorBoundary>
     </div>
   );
 }

@@ -4,13 +4,50 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#050b06" />
     <title>AgriOS 3D | किसान साथी - Smart Farming Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        background-color: #050b06;
+        color: #ffffff;
+      }
+      #root-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 50% 30%, #0d2818 0%, #050b06 80%);
+        font-family: 'Outfit', sans-serif;
+        z-index: 9999;
+      }
+      .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(52, 211, 153, 0.2);
+        border-top-color: #10b981;
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+        margin-bottom: 1rem;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="root-loader">
+        <div class="loader-spinner"></div>
+        <p style="color: #34d399; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px;">AgriOS 3D Initializing...</p>
+        <p style="color: #9ca3af; font-size: 0.8rem; margin-top: 4px;">लोड हो रहा है...</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
