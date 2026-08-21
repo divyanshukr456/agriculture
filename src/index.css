@@ -216,13 +216,25 @@ body {
     display: none !important;
   }
 
+  .navbar-header-wrapper {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 0.6rem 0.85rem !important;
+    gap: 0.55rem !important;
+  }
+
   .navbar-actions-scroll {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
     overflow-x: auto !important;
     max-width: 100% !important;
     white-space: nowrap !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     -webkit-overflow-scrolling: touch !important;
+    padding: 2px 2px 4px !important;
+    width: 100% !important;
   }
   .navbar-actions-scroll::-webkit-scrollbar {
     display: none !important;

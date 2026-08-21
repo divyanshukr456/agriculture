@@ -139,26 +139,25 @@ export default function Navbar({ activeTab, setActiveTab }) {
       </div>
 
       {/* Main Navbar */}
-      <div style={{
+      <div className="navbar-header-wrapper" style={{
         maxWidth: '1440px',
         margin: '0 auto',
-        padding: '0.75rem 1.5rem',
+        padding: '0.65rem 1.25rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
-        flexWrap: 'wrap',
       }}>
         {/* Brand Logo & Tag */}
         <div 
           onClick={() => navigate('/')} 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', flexShrink: 0 }}
         >
           <motion.div 
             whileHover={{ rotate: 15, scale: 1.1 }}
             style={{
-              width: 44,
-              height: 44,
+              width: 42,
+              height: 42,
               borderRadius: '12px',
               background: 'linear-gradient(135deg, #10b981, #059669)',
               display: 'flex',
@@ -166,15 +165,16 @@ export default function Navbar({ activeTab, setActiveTab }) {
               justifyContent: 'center',
               boxShadow: '0 0 20px rgba(16,185,129,0.5)',
               border: '1px solid rgba(255,255,255,0.2)',
+              flexShrink: 0,
             }}
           >
-            <Sprout size={26} color="#ffffff" />
+            <Sprout size={24} color="#ffffff" />
           </motion.div>
 
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h1 style={{
-                fontSize: '1.35rem',
+                fontSize: '1.3rem',
                 fontWeight: '900',
                 background: 'linear-gradient(to right, #ffffff, #34d399)',
                 WebkitBackgroundClip: 'text',
@@ -182,7 +182,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
                 margin: 0,
                 letterSpacing: '-0.5px',
               }}>
-                {t.appName}
+                Farmer Help
               </h1>
               <span style={{
                 background: 'rgba(16,185,129,0.15)',
@@ -200,7 +200,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
                 {t.badgeActive}
               </span>
             </div>
-            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-muted)' }}>
               {t.appTagline}
             </p>
           </div>
