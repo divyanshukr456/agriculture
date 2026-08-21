@@ -189,8 +189,8 @@ export default function Navbar({ activeTab, setActiveTab }) {
           </div>
         </div>
 
-        {/* Center Navigation Tabs */}
-        <nav style={{
+        {/* Center Navigation Tabs (Desktop) */}
+        <nav className="desktop-nav-tabs" style={{
           display: 'flex',
           gap: '6px',
           background: 'rgba(0,0,0,0.4)',

@@ -9,6 +9,7 @@ import Soil3DCard from './components/Soil3DCard';
 import MandiPrices from './components/MandiPrices';
 import PestRadar from './components/PestRadar';
 import GovtSchemes from './components/GovtSchemes';
+import MobileBottomNav from './components/MobileBottomNav';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PhoneCall, ShieldCheck, Heart, Sparkles, Sprout } from 'lucide-react';
@@ -230,6 +231,9 @@ function DashboardContent() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Bottom Navigation Bar for Mobile */}
+      <MobileBottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 }

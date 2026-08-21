@@ -28,6 +28,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -82,6 +83,82 @@ body {
   z-index: 10;
 }
 
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(5, 15, 8, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--glass-border);
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.mobile-nav-inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.mobile-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  outline: none;
+  user-select: none;
+}
+
+.mobile-nav-btn.active {
+  color: #34d399;
+}
+
+.mobile-nav-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.mobile-active-dot {
+  position: absolute;
+  bottom: -2px;
+  width: 18px;
+  height: 3px;
+  background: #10b981;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.highlight-pill {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(16,185,129,0.5);
+  margin-top: -12px;
+}
+
 /* Laser Scan Animation */
 @keyframes laserScan {
   0% {
@@ -134,10 +211,47 @@ body {
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 840px) {
+  .desktop-nav-tabs {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav {
+    display: block !important;
+  }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
+    padding: 0.85rem;
+    gap: 1rem;
+  }
+
+  .glass-panel {
+    padding: 1.15rem;
+    border-radius: 16px;
+  }
+
+  main {
+    padding-bottom: 90px !important;
+  }
+
+  h1, h2 {
+    font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+  }
+
+  .title-glow {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-grid {
+    padding: 0.65rem;
+  }
+
+  .glass-panel {
     padding: 1rem;
+    border-radius: 14px;
   }
 }
 
