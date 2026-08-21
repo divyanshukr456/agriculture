@@ -216,6 +216,18 @@ body {
     display: none !important;
   }
 
+  .navbar-actions-scroll {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .navbar-actions-scroll::-webkit-scrollbar {
+    display: none !important;
+  }
+
   .mobile-bottom-nav {
     display: block !important;
   }

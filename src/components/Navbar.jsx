@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { 
   Sprout, 
   Globe2, 
@@ -19,11 +20,24 @@ import { mandiRatesData } from '../i18n/translations';
 
 export default function Navbar({ activeTab, setActiveTab }) {
   const { lang, toggleLanguage, t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedFarm, setSelectedFarm] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
   const [currentLocationText, setCurrentLocationText] = useState(t.location.detected);
   const [isDetectingGPS, setIsDetectingGPS] = useState(false);
+
+  const currentPath = location.pathname;
+
+  const tabs = [
+    { id: 'dashboard', path: '/', label: t.nav.dashboard },
+    { id: 'cropDoctor', path: '/doctor', label: t.nav.cropDoctor },
+    { id: 'weather', path: '/weather', label: t.nav.weather },
+    { id: 'mandiPrices', path: '/mandi', label: t.nav.mandiPrices },
+    { id: 'pestRadar', path: '/pest', label: t.nav.pestRadar },
+    { id: 'schemes', path: '/schemes', label: t.nav.schemes },
+  ];
 
   const farms = [
     { nameEn: "🚜 North Sector (Plot #4) - 4.5 Ac", nameHi: "🚜 उत्तरी खेत (प्लॉट #4) - 4.5 एकड़" },
@@ -136,7 +150,10 @@ export default function Navbar({ activeTab, setActiveTab }) {
         flexWrap: 'wrap',
       }}>
         {/* Brand Logo & Tag */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+        <div 
+          onClick={() => navigate('/')} 
+          style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer' }}
+        >
           <motion.div 
             whileHover={{ rotate: 15, scale: 1.1 }}
             style={{
@@ -200,49 +217,66 @@ export default function Navbar({ activeTab, setActiveTab }) {
           overflowX: 'auto',
           maxWidth: '100%',
         }}>
-          {[
-            { id: 'dashboard', label: t.nav.dashboard },
-            { id: 'cropDoctor', label: t.nav.cropDoctor },
-            { id: 'weather', label: t.nav.weather },
-            { id: 'mandiPrices', label: t.nav.mandiPrices },
-            { id: 'pestRadar', label: t.nav.pestRadar },
-            { id: 'schemes', label: t.nav.schemes },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              style={{
-                padding: '8px 14px',
-                borderRadius: '10px',
-                border: 'none',
-                background: activeTab === tab.id ? 'var(--accent-green)' : 'transparent',
-                color: activeTab === tab.id ? '#000000' : 'var(--text-muted)',
-                fontWeight: activeTab === tab.id ? '800' : '500',
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+          {tabs.map((tab) => {
+            const isActive = (tab.path === '/' && (currentPath === '/' || currentPath === '/dashboard')) ||
+                             (tab.path !== '/' && currentPath.startsWith(tab.path));
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  if (setActiveTab) setActiveTab(tab.id);
+                  navigate(tab.path);
+                }}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  background: isActive ? 'var(--accent-green)' : 'transparent',
+                  color: isActive ? '#000000' : 'var(--text-muted)',
+                  fontWeight: isActive ? '800' : '500',
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Right Actions: Farm Switcher, GPS, Notifications & Language Switch */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div 
+          className="navbar-actions-scroll"
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            overflowX: 'auto',
+            maxWidth: '100%',
+            whiteSpace: 'nowrap',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+            padding: '2px 0',
+          }}
+        >
           {/* Farm Switcher */}
           <select
             value={selectedFarm}
             onChange={(e) => setSelectedFarm(Number(e.target.value))}
             style={{
-              background: 'rgba(0,0,0,0.5)',
+              background: 'rgba(0,0,0,0.6)',
               border: '1px solid var(--glass-border)',
               borderRadius: '10px',
               padding: '6px 10px',
               color: '#fff',
               fontSize: '0.78rem',
               outline: 'none',
+              maxWidth: '155px',
+              textOverflow: 'ellipsis',
+              flexShrink: 0,
+              cursor: 'pointer',
             }}
           >
             {farms.map((f, i) => (
@@ -260,13 +294,14 @@ export default function Navbar({ activeTab, setActiveTab }) {
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              background: 'rgba(255,255,255,0.04)',
+              background: 'rgba(255,255,255,0.06)',
               padding: '6px 10px',
               borderRadius: '10px',
               border: '1px solid var(--glass-border)',
               fontSize: '0.78rem',
               color: '#e0e0e0',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             <Compass size={14} color="#34d399" className={isDetectingGPS ? "spin-icon" : ""} />
@@ -276,14 +311,14 @@ export default function Navbar({ activeTab, setActiveTab }) {
           </button>
 
           {/* Notification Bell Dropdown */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
             <button
               onClick={() => {
                 setShowNotifications(!showNotifications);
                 setUnreadCount(0);
               }}
               style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: 'rgba(255,255,255,0.06)',
                 border: '1px solid var(--glass-border)',
                 width: 36,
                 height: 36,
@@ -329,14 +364,15 @@ export default function Navbar({ activeTab, setActiveTab }) {
                     position: 'absolute',
                     top: 45,
                     right: 0,
-                    width: '320px',
-                    background: 'rgba(10, 22, 14, 0.95)',
+                    width: '300px',
+                    maxWidth: '90vw',
+                    background: 'rgba(10, 22, 14, 0.97)',
                     backdropFilter: 'blur(16px)',
                     border: '1px solid var(--glass-border)',
                     borderRadius: '14px',
                     padding: '1rem',
-                    boxShadow: '0 15px 40px rgba(0,0,0,0.7)',
-                    zIndex: 200,
+                    boxShadow: '0 15px 40px rgba(0,0,0,0.8)',
+                    zIndex: 999,
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.5rem' }}>
@@ -372,21 +408,22 @@ export default function Navbar({ activeTab, setActiveTab }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.4))',
-              border: '1px solid rgba(52, 211, 153, 0.5)',
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(5, 150, 105, 0.5))',
+              border: '1px solid rgba(52, 211, 153, 0.6)',
               color: '#ffffff',
               padding: '6px 14px',
               borderRadius: '24px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: '800',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
               cursor: 'pointer',
               boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)',
+              flexShrink: 0,
             }}
           >
-            <Globe2 size={16} color="#34d399" />
+            <Globe2 size={15} color="#34d399" />
             <span>{lang === 'en' ? '🇮🇳 हिंदी' : '🌐 English'}</span>
           </motion.button>
         </div>

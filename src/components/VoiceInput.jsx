@@ -209,7 +209,7 @@ export default function VoiceInput({ onCommandNavigate }) {
           )}
           {aiResponse && (
             <p style={{ fontSize: '0.85rem', color: '#ffffff', margin: 0, lineHeight: 1.4 }}>
-              <strong>🤖 {lang === 'hi' ? "उत्तर:" : "AgriOS:"} </strong> {aiResponse}
+              <strong>🤖 {lang === 'hi' ? "उत्तर:" : "Farmer Help:"} </strong> {aiResponse}
             </p>
           )}
         </div>

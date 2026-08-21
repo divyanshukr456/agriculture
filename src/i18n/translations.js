@@ -1,9 +1,9 @@
-// Comprehensive Bilingual Dictionary & Knowledge Base for AgriOS Pro (English & Hindi)
+// Comprehensive Bilingual Dictionary & Knowledge Base for Farmer Help (English & Hindi)
 
 export const translations = {
   en: {
-    appName: "AgriOS 3D",
-    appTagline: "Next-Gen AI Farming & Spatial Agronomy",
+    appName: "Farmer Help",
+    appTagline: "Next-Gen AI Farming & Smart Assistance",
     badgeActive: "AI Core Online",
     nav: {
       dashboard: "🌾 Dashboard",
@@ -175,12 +175,12 @@ export const translations = {
     footer: {
       tagline: "Empowering 140M+ Indian Farmers with 3D Spatial Intelligence",
       helpline: "Kisan Call Center: 1800-180-1551 (Toll-Free 24x7)",
-      rights: "© 2026 AgriOS Pro. Precision Agronomy System.",
+      rights: "© 2026 Farmer Help. Precision Agronomy System.",
     },
   },
   hi: {
-    appName: "एग्री-ओएस 3D",
-    appTagline: "आधुनिक एआई खेती और फसल रोग विशेषज्ञ",
+    appName: "Farmer Help",
+    appTagline: "आधुनिक एआई खेती और किसान साथी",
     badgeActive: "एआई सिस्टम सक्रिय",
     nav: {
       dashboard: "🌾 किसान डैशबोर्ड",
@@ -352,7 +352,7 @@ export const translations = {
     footer: {
       tagline: "14 करोड़+ भारतीय किसान भाइयों के लिए 3D सटीक कृषि तकनीक",
       helpline: "किसान कॉल सेंटर: 1800-180-1551 (निःशुल्क 24x7)",
-      rights: "© 2026 एग्री-ओएस प्रो. उन्नत कृषि समाधान।",
+      rights: "© 2026 Farmer Help. उन्नत कृषि समाधान।",
     },
   },
 };

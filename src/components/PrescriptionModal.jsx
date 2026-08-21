@@ -72,7 +72,7 @@ export default function PrescriptionModal({ diagnosis, onClose }) {
                 <Sprout size={20} />
               </div>
               <h2 style={{ fontSize: '1.4rem', fontWeight: '900', color: '#065f46', margin: 0 }}>
-                AgriOS Precision Agronomy Clinic
+                Farmer Help Precision Agronomy Clinic
               </h2>
             </div>
             <p style={{ fontSize: '0.82rem', color: '#6b7280', margin: '0.25rem 0 0 42px' }}>
@@ -153,7 +153,7 @@ export default function PrescriptionModal({ diagnosis, onClose }) {
         <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div style={{ fontSize: '0.78rem', color: '#6b7280' }}>
             <p style={{ margin: 0 }}>📞 Kisan Toll-Free: <strong>1800-180-1551</strong></p>
-            <p style={{ margin: '2px 0 0' }}>AgriOS AI Verified Pathology System</p>
+            <p style={{ margin: '2px 0 0' }}>Farmer Help AI Verified Pathology System</p>
           </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>

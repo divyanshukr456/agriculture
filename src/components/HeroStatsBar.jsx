@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Sprout, 
   Activity, 
@@ -18,6 +19,12 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function HeroStatsBar({ onNavigate }) {
   const { lang, t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleNav = (path, tabName) => {
+    if (onNavigate) onNavigate(tabName);
+    navigate(path);
+  };
 
   const metrics = [
     {
@@ -126,7 +133,7 @@ export default function HeroStatsBar({ onNavigate }) {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => onNavigate('cropDoctor')}
+            onClick={() => handleNav('/doctor', 'cropDoctor')}
             style={{
               background: 'linear-gradient(135deg, #10b981, #059669)',
               color: '#000000',
@@ -149,7 +156,7 @@ export default function HeroStatsBar({ onNavigate }) {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => onNavigate('mandiPrices')}
+            onClick={() => handleNav('/mandi', 'mandiPrices')}
             style={{
               background: 'rgba(255,255,255,0.06)',
               color: '#ffffff',
@@ -171,7 +178,7 @@ export default function HeroStatsBar({ onNavigate }) {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => onNavigate('schemes')}
+            onClick={() => handleNav('/schemes', 'schemes')}
             style={{
               background: 'rgba(255,255,255,0.06)',
               color: '#ffffff',
