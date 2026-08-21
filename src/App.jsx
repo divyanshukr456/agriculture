@@ -10,6 +10,7 @@ import MandiPrices from './components/MandiPrices';
 import PestRadar from './components/PestRadar';
 import GovtSchemes from './components/GovtSchemes';
 import MobileBottomNav from './components/MobileBottomNav';
+import HeroStatsBar from './components/HeroStatsBar';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PhoneCall, ShieldCheck, Heart, Sparkles, Sprout } from 'lucide-react';
@@ -24,76 +25,10 @@ function DashboardContent() {
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <main style={{ flex: 1, paddingBottom: '2.5rem' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '1rem 1.5rem 0' }}>
-          {/* Quick Action Welcome Hero on Dashboard */}
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
+          {/* Interactive Live Telemetry Hero Stats & Action Hub */}
           {activeTab === 'dashboard' && (
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '1rem',
-                marginBottom: '1.25rem',
-                background: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(5,150,105,0.05))',
-                border: '1px solid rgba(52,211,153,0.25)',
-                borderRadius: '16px',
-                padding: '1rem 1.5rem',
-              }}
-            >
-              <div>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, color: '#fff' }}>
-                  {lang === 'hi' ? "नमस्ते किसान भाई! 🙏" : "Welcome Back, Precision Farmer! 🌾"}
-                </h2>
-                <p style={{ color: '#a8e6cf', fontSize: '0.85rem', margin: '0.2rem 0 0' }}>
-                  {lang === 'hi' 
-                    ? "आज आपकी फसल और मिट्टी की स्थिति सामान्य है। किसी भी पत्ते की जांच के लिए तुरंत फोटो लें या नमूना पत्ता चुनें।" 
-                    : "Your crop telemetry is stable. Use the live camera scanner below to detect leaf infections."}
-                </p>
-              </div>
-
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                <button
-                  onClick={() => setActiveTab('cropDoctor')}
-                  style={{
-                    background: 'linear-gradient(135deg, #10b981, #059669)',
-                    color: '#000',
-                    border: 'none',
-                    padding: '8px 16px',
-                    borderRadius: '24px',
-                    fontSize: '0.85rem',
-                    fontWeight: '800',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  📷 {lang === 'hi' ? "फसल रोग स्कैन करें" : "Scan Crop Leaf"}
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('schemes')}
-                  style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    color: '#fff',
-                    border: '1px solid var(--glass-border)',
-                    padding: '8px 16px',
-                    borderRadius: '24px',
-                    fontSize: '0.85rem',
-                    fontWeight: '700',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  🏛️ {lang === 'hi' ? "सरकारी योजनाएं" : "Govt Schemes"}
-                </button>
-              </div>
-            </motion.div>
+            <HeroStatsBar onNavigate={(tab) => setActiveTab(tab)} />
           )}
         </div>
 
